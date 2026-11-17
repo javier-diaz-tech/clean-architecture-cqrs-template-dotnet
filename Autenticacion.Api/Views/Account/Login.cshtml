@@ -1,0 +1,35 @@
+﻿@model Autenticacion.Api.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Iniciar sesión";
+}
+
+<h1>ArquitecturaBase</h1>
+<h2>Iniciar sesión</h2>
+
+<div asp-validation-summary="All"></div>
+
+<form asp-controller="Account"
+      asp-action="Login"
+      method="post">
+
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" asp-for="ReturnUrl" />
+
+    <div>
+        <label asp-for="UserName">Usuario</label>
+        <input asp-for="UserName" autocomplete="username" />
+        <span asp-validation-for="UserName"></span>
+    </div>
+
+    <div>
+        <label asp-for="Password">Contraseña</label>
+        <input asp-for="Password"
+               type="password"
+               autocomplete="current-password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+
+    <button type="submit">Ingresar</button>
+</form>
