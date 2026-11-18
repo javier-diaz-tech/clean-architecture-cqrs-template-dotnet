@@ -1,0 +1,67 @@
+services:
+  arquitecturabase:
+    # Construye usando el Dockerfile ubicado en la misma raíz (.)
+    build:
+      context: .
+      dockerfile: Presentacion/Dockerfile
+    container_name: arquitecturabase.api
+    restart: unless-stopped               # Se levanta solo si el servidor Linux se reinicia
+    ports:
+      - "3000:8080"               # Puerto_Servidor_Linux : Puerto_Contenedor
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_HTTP_PORTS: 8080
+      Swagger__Enabled: ${Swagger_Enabled:-true}
+      Persistence__Provider: ${PERSISTENCE_PROVIDER}
+      ConnectionStrings__DefaultConnection: ${APP_CONNECTION_STRING}
+
+    # Identificación de la aplicación
+      OpenTelemetry__ServiceName: ArquitecturaBase.Api
+      OpenTelemetry__EnableConsoleExporter: "true"
+      OpenTelemetry__EnableOtlpExporter: "false"
+    
+    
+    
+    # env_file:
+    #   - .env                    # Descomenta esto si usas un archivo .env
+   
+    networks:
+      - red_microservicios
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: arquitecturabase.sqlserver
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Express
+      MSSQL_SA_PASSWORD: ${SQLSERVER_PASSWORD}
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - red_microservicios
+
+  postgres:
+    image: postgres:17-alpine
+    container_name: arquitecturabase.postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - red_microservicios
+
+networks:
+  red_microservicios:
+    driver: bridge
+
+volumes:
+  sqlserver_data:
+  postgres_data:
