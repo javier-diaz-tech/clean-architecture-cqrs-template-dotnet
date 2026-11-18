@@ -11,8 +11,8 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_HTTP_PORTS: 8080
-      Swagger__Enabled: ${Swagger_Enabled:-true}
-      Persistence__Provider: ${PERSISTENCE_PROVIDER}
+      Swagger__Enabled: ${SWAGGER_ENABLED:-true}
+      Persistence__Provider: SqlServer
       ConnectionStrings__DefaultConnection: ${APP_CONNECTION_STRING}
 
     # Identificación de la aplicación
@@ -22,11 +22,11 @@ services:
     
     
     
-    # env_file:
-    #   - .env                    # Descomenta esto si usas un archivo .env
-   
     networks:
       - red_microservicios
+    depends_on:
+      sqlserver:
+        condition: service_healthy
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -36,25 +36,16 @@ services:
       ACCEPT_EULA: "Y"
       MSSQL_PID: Express
       MSSQL_SA_PASSWORD: ${SQLSERVER_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$${MSSQL_SA_PASSWORD}\" -C -Q \"SELECT 1\" -b -o /dev/null"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
     ports:
       - "1433:1433"
     volumes:
       - sqlserver_data:/var/opt/mssql
-    networks:
-      - red_microservicios
-
-  postgres:
-    image: postgres:17-alpine
-    container_name: arquitecturabase.postgres
-    restart: unless-stopped
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
     networks:
       - red_microservicios
 
@@ -64,4 +55,3 @@ networks:
 
 volumes:
   sqlserver_data:
-  postgres_data:
