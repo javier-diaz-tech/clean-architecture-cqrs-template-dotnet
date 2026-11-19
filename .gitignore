@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /ArquitecturaBase.zip
+/Guia-tecnica-ArquitecturaBase-Basic.md
+/Resumen-comercial-ArquitecturaBase-Basic.md
