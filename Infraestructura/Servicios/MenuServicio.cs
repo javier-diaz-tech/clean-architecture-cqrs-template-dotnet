@@ -3,7 +3,6 @@ using Dominio.Entidades;
 using Dominio.Modelos;
 using Infraestructura.Persistencia;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace Infraestructura.Servicios
 {

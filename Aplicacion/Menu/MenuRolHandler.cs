@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Dominio.Modelos;
 using Aplicacion.Interfaces;
-using Microsoft.Extensions.Logging;
 namespace Aplicacion.Menu
 {
 

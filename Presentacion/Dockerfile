@@ -25,8 +25,6 @@ RUN dotnet restore "Presentacion/Presentacion.csproj"
 COPY . .
 WORKDIR "/src/Presentacion"
 
-#RUN dotnet build "Presentacion.csproj" -c $BUILD_CONFIGURATION -o /app/build --no-restore
-
 # Esta fase se usa para publicar el proyecto de servicio que se copiará en la fase final.
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release

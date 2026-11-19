@@ -1,6 +1,6 @@
 @Presentacion_HostAddress = http://localhost:5021
 
-GET {{Presentacion_HostAddress}}/weatherforecast/
+GET {{Presentacion_HostAddress}}/Arquitectura/
 Accept: application/json
 
 ###

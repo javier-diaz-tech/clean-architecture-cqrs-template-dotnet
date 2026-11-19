@@ -1,9 +1,5 @@
 using Aplicacion;
 using Infraestructura;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Identity.Web;
-using Microsoft.Win32;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
@@ -11,18 +7,6 @@ using OpenTelemetry.Trace;
 using Presentacion.ManejadorExcepciones;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-//builder.Services.AddOpenIddict()
-//    .AddValidation(options =>
-//    {
-//        options.SetIssuer("https://localhost:5068/");
-//        options.AddAudiences("arquitecturabase.api");
-
-//        options.UseSystemNetHttp();
-//        options.UseAspNetCore();
-//    });
-
 
 builder.Services.AddInfraestructuraServicios(builder.Configuration);
 builder.Services.AddAplicacionServicios();
@@ -97,8 +81,6 @@ if (swaggerEnabled)
 
 app.UseExceptionHandler();
 app.UseHttpsRedirection();
-
-//app.UseAuthentication();
 
 app.UseAuthorization();
 
