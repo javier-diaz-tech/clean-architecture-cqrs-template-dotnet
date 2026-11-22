@@ -260,7 +260,7 @@ Demostrar la implementación de una arquitectura empresarial moderna basada en:
 
 Esta plantilla sirve como base para nuevos proyectos y como referencia arquitectónica para desarrolladores que deseen construir aplicaciones desacopladas, mantenibles y orientadas a casos de uso.
 
-##Licencia
+#Licencia
 Todos los derechos reservados.
 
 Este repositorio se publica con fines educativos y de demostración profesional. El uso, distribución o comercialización del código requiere autorización expresa del autor.
