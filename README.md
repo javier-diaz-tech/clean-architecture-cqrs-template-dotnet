@@ -208,7 +208,7 @@ docker compose up -d
 
 ## Alcance de la plantilla
 
-ArquitecturaBase Basic no pretende ser una aplicación de negocio completa.
+clean-architecture-cqrs-template-dotnet no pretende ser una aplicación de negocio completa.
 
 Su objetivo es proporcionar una base técnica para iniciar nuevos proyectos con una arquitectura moderna y preparada para crecer.
 
@@ -259,3 +259,8 @@ Demostrar la implementación de una arquitectura empresarial moderna basada en:
 - Buenas prácticas de desarrollo en .NET.
 
 Esta plantilla sirve como base para nuevos proyectos y como referencia arquitectónica para desarrolladores que deseen construir aplicaciones desacopladas, mantenibles y orientadas a casos de uso.
+
+##Licencia
+Todos los derechos reservados.
+
+Este repositorio se publica con fines educativos y de demostración profesional. El uso, distribución o comercialización del código requiere autorización expresa del autor.
